@@ -177,10 +177,11 @@ def _group_testing_shapley_mnist(
 
         net = copy.deepcopy(null_model)
         class_lr = 0.0001
-        #mnist
-        # class_epoch = 50
+        if test_dataset == 'mnist':
+            class_epoch = 50
         #CIFAR 
-        class_epoch = 100
+        if test_dataset == 'cifar':
+            class_epoch = 100
         class_optimizer=torch.optim.Adam(net.parameters(),lr=class_lr)
         loss_function=nn.CrossEntropyLoss()
         accuracy_best=0
@@ -252,10 +253,12 @@ def _group_testing_shapley_cifar(
 
         net = copy.deepcopy(null_model)
         class_lr = 0.0001
-        #mnist
-        # class_epoch = 50
+      
+        if test_dataset == 'mnist':
+            class_epoch = 50
         #CIFAR 
-        class_epoch = 100
+        if test_dataset == 'cifar':
+            class_epoch = 100
         class_optimizer=torch.optim.Adam(net.parameters(),lr=class_lr)
         loss_function=nn.CrossEntropyLoss()
         accuracy_best=0

@@ -132,7 +132,7 @@ def num_samples_eps_delta(
     return int(constants.T)
 
 
-def _group_testing_shapley_mnist(
+def _group_testing_shapley_mnist(test_dataset,
     train_data, train_data_label,grand_model,null_model,train_size,test_sample,test_sample_label,
     n_samples: int,
     progress: bool = False,
@@ -208,7 +208,7 @@ def _group_testing_shapley_mnist(
     # print(uu,betas)
     return uu, betas
 
-def _group_testing_shapley_cifar(
+def _group_testing_shapley_cifar(test_dataset,
     train_data, train_data_label,grand_model,null_model,train_size,test_sample,test_sample_label,
     n_samples: int,
     progress: bool = False,
@@ -382,9 +382,9 @@ def group_testing_shapley(
     # uu, betas = map_reduce_job(seed=map_reduce_seed_sequence)
     
     if test_dataset == 'cifar':
-        uu, betas = _group_testing_shapley_cifar(train_data, train_data_label,grand_model,null_model,train_size,test_sample,test_sample_label,samples_per_job)
+        uu, betas = _group_testing_shapley_cifar(test_dataset,train_data, train_data_label,grand_model,null_model,train_size,test_sample,test_sample_label,samples_per_job)
     if test_dataset == 'mnist':
-        uu, betas = _group_testing_shapley_mnist(train_data, train_data_label,grand_model,null_model,train_size,test_sample,test_sample_label,samples_per_job)
+        uu, betas = _group_testing_shapley_mnist(test_dataset,train_data, train_data_label,grand_model,null_model,train_size,test_sample,test_sample_label,samples_per_job)
     
     # Matrix of estimated differences. See Eqs. (3) and (4) in the paper.
     C = np.zeros(shape=(n, n))
